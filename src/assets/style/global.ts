@@ -77,6 +77,9 @@ textarea {
   font-family: Raleway !important;
   width: auto;
   padding: 1.5rem;
+  img{
+    border-radius: 1rem;
+  }
 
 }
 .confirmButtonSweet, .cancelButtonSweet, .denyButtonSweet {

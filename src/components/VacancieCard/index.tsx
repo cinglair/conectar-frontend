@@ -132,9 +132,11 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
               console.log(result.value);
               const find = await Alert({
                 title: `${result.value.nome}`,
+                imageHeight:'18rem',
+                imageAlt:'Foto do perfil a ser buscado',
                 imageUrl: result.value.foto_perfil
                 ? `https://conectar.s3.sa-east-1.amazonaws.com/uploads/${result.value?.foto_perfil}`
-                : userDefault,
+                : `https://3er1viui9wo30pkxh1v2nh4w-wpengine.netdna-ssl.com/wp-content/uploads/2017/12/XboxOneX_33.jpg`,
                 confirmButtonText: 'Confirmar',
                 showCancelButton:true,
                 cancelButtonText:"Cancelar",
