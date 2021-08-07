@@ -75,8 +75,16 @@ textarea {
 
 .swal2-popup {
   font-family: Raleway !important;
+  width: auto;
+  padding: 1.5rem;
 
 }
+.confirmButtonSweet, .cancelButtonSweet, .denyButtonSweet {
+  width: 12rem;
+  height: 2.2rem;
+  padding: 0.6rem;
+}
+
 
 .confirmButtonSweet {
   /* background: var(--green)!important; */
@@ -85,8 +93,6 @@ textarea {
   font-weight: 600;
   border-radius: 2rem!important;
   text-transform: uppercase;
-  padding: 0.6rem 2rem;
-  height: 2.2rem;
 }
 
 .cancelButtonSweet {
@@ -97,8 +103,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 2rem;
-  height: 2.2rem;
+  
 }
 
 .denyButtonSweet {
@@ -109,8 +114,6 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 2rem;
-  height: 2.2rem;
 }
 #loadingContainer{
     position:absolute;

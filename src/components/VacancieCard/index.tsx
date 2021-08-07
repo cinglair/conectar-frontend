@@ -11,6 +11,9 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { TypeSituationVacancy } from '../Vacancy'
 import Alert from '../../utils/SweetAlert'
 import Swal from 'sweetalert2'
+import { Toast } from 'react-toastify/dist/components'
+import { toast } from 'react-toastify'
+import { showToast } from '../Toast/Toast'
 export interface IVacancyCard {
   projeto_id: number
   pessoa_id: number
@@ -84,9 +87,9 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
       text: `${
         profile?.nome?.split(` `)[0]
       } não aparecerá mais para preencher essa vaga`,
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Busca com o conectar',
+      confirmButtonText: 'Busca Automatica',
       showDenyButton:true,
       denyButtonText:"Busca Manual",
       denyButtonColor: `var(--green)`,
@@ -98,6 +101,8 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
         inputAttributes: {
           autocapitalize: 'off'
         },
+        icon: 'info',
+        inputPlaceholder: "@",
         showCancelButton: true,
         confirmButtonText: 'Buscar',
         showLoaderOnConfirm: true,
@@ -105,7 +110,13 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
           return api
             .get(`/api/v1/pessoas/${login}`)
             .then(response => {
-              return response.data
+              console.log(response.data);
+              if(response.data == null)
+                Swal.showValidationMessage(
+                  `Request failed: Usuário não encontrado`
+                )
+              else
+                return response.data
             })
             .catch(error => {
               Swal.showValidationMessage(
@@ -114,16 +125,36 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
             })
         },
             allowOutsideClick: () => !Swal.isLoading()
-          }).then((result ) => {
+          }).then(async (result ) => {
+            console.log("Result confirmed")
+            
             if (result.isConfirmed) {
               console.log(result.value);
-              
-              Alert({
+              const find = await Alert({
                 title: `${result.value.nome}`,
                 imageUrl: result.value.foto_perfil
                 ? `https://conectar.s3.sa-east-1.amazonaws.com/uploads/${result.value?.foto_perfil}`
                 : userDefault,
+                confirmButtonText: 'Confirmar',
+                showCancelButton:true,
+                cancelButtonText:"Cancelar",
               })
+              if(find.isConfirmed){
+                await 
+                api
+                  .put(`api/v1/pessoa_projeto/${vacancy.id}`, {pessoa_id: result.value.id}).then(() => {
+                    showToast('success', 'Vaga atualizada com Sucesso!')
+                    setProfile(result.value)
+                  })
+                  .catch((err: AxiosError) => {
+                    Alert({
+                      title: `Erro: ${err.message}`,
+                      text: 'Não foi possível atualizar a vaga, tente novamente!',
+                      icon: 'error',
+                    })
+                    return err?.response?.data.detail
+                  })
+              }
             }
             })
     }
