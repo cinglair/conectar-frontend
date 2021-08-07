@@ -24,10 +24,7 @@ import RecentesInviteCard from '../../components/RecentesInviteCard'
 
 const Explorer: React.FC = () => {
   const { loading, isAuthenticated } = useContext(Context)
-  console.log('esta autenticado?')
-  console.log(isAuthenticated)
-
-  const [projects, setProjects] = useState<IProject[]>([] as IProject[])
+  const [projects, setProjects] = useState<IProject[]>([])
   useEffect(() => {
     api
       .get(`/api/v1/projetos?visibilidade=true`)

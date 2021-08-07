@@ -18,6 +18,7 @@ import Modal from '../../components/UI/Modal'
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaLinkedinIn } from 'react-icons/fa'
 import { AiFillFacebook, AiOutlineInstagram } from 'react-icons/ai'
+import inGif from '../../assets/video/logo.mp4'
 
 import { Context } from '../../context/AuthContext'
 

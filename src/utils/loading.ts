@@ -1,21 +1,25 @@
+import inGif from '../assets/video/LOOP.gif'
+
 export const loading = {
   start: (): void => {
-    const loadingContaineir = document.createElement('div')
-    loadingContaineir.id = 'loadingContainer'
+    const loadingContainer = document.createElement('div')
+    loadingContainer.id = 'loadingContainer'
 
     const gifLoading = document.createElement('img')
-    gifLoading.src =
-      'https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif'
-    loadingContaineir.appendChild(gifLoading) // adiciona o nó de texto à nova div criada
-
+    gifLoading.src = inGif
+    loadingContainer.appendChild(gifLoading) // adiciona o nó de texto à nova div criada
+    setTimeout(() => {
+      gifLoading.src = ''
+      console.log('ed')
+    }, 1000)
     // adiciona o novo elemento criado e seu conteúdo ao DOM
     const root = document.getElementById('root')
-    document.body.insertBefore(loadingContaineir, root)
+    document.body.insertBefore(loadingContainer, root)
   },
   stop: (): void => {
-    const loadingContaineir = document.getElementById('loadingContainer')
-    if (loadingContaineir) {
-      loadingContaineir?.parentNode?.removeChild(loadingContaineir)
+    const loadingContainer = document.getElementById('loadingContainer')
+    if (loadingContainer) {
+      loadingContainer?.parentNode?.removeChild(loadingContainer)
     }
   },
 }

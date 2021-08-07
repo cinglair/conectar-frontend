@@ -113,25 +113,24 @@ textarea {
   height: 2.2rem;
 }
 #loadingContainer{
-    color:darkblue;
     position:absolute;
     z-index:1000;
     width: 100%;
     height: 100%;
-    background: black;
-    opacity: 0.4;
+    background:rgba(0, 0, 0, 0.5);;
     display: flex;
     justify-content: center;
     align-items: center;
     img{
-        height: 3rem;
-        width: 3rem;
+        height: 8rem;
+        width: 8rem;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        background: transparent;
     }
 }
 

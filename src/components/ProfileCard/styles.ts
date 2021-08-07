@@ -16,8 +16,8 @@ export const BodyCard = styled.div`
     background: var(--borderDivision);
     grid-column: 1;
     grid-row: 1 / -1;
-    border-radius: 50%;
     border: solid 1px var(--borderDivision);
+    border-radius: 50%;
     width: 100px;
     height: 100px;
     object-fit: cover;
