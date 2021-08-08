@@ -90,73 +90,72 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Busca Automatica',
-      showDenyButton:true,
-      denyButtonText:"Busca Manual",
+      showDenyButton: true,
+      denyButtonText: 'Busca Manual',
       denyButtonColor: `var(--green)`,
     })
-    if(result.isDenied){
+    if (result.isDenied) {
       Alert({
         title: 'Insira o username',
         input: 'text',
         inputAttributes: {
-          autocapitalize: 'off'
+          autocapitalize: 'off',
         },
         icon: 'info',
-        inputPlaceholder: "@",
+        inputPlaceholder: '@',
         showCancelButton: true,
         confirmButtonText: 'Buscar',
         showLoaderOnConfirm: true,
-        preConfirm: (login) => {
+        preConfirm: login => {
           return api
             .get(`/api/v1/pessoas/${login}`)
             .then(response => {
-              console.log(response.data);
-              if(response.data == null)
+              console.log(response.data)
+              if (response.data == null)
                 Swal.showValidationMessage(
-                  `Request failed: Usuário não encontrado`
+                  `Request failed: Usuário não encontrado`,
                 )
-              else
-                return response.data
+              else return response.data
             })
             .catch(error => {
-              Swal.showValidationMessage(
-                `Request failed: ${error}`
-              )
+              Swal.showValidationMessage(`Request failed: ${error}`)
             })
         },
-            allowOutsideClick: () => !Swal.isLoading()
-          }).then(async (result ) => {
-            console.log("Result confirmed")
-            
-            if (result.isConfirmed) {
-              console.log(result.value);
-              const find = await Alert({
-                title: `${result.value.nome}`,
-                imageUrl: result.value.foto_perfil
-                ? `https://conectar.s3.sa-east-1.amazonaws.com/uploads/${result.value?.foto_perfil}`
-                : userDefault,
-                confirmButtonText: 'Confirmar',
-                showCancelButton:true,
-                cancelButtonText:"Cancelar",
+        allowOutsideClick: () => !Swal.isLoading(),
+      }).then(async result => {
+        console.log('Result confirmed')
+
+        if (result.isConfirmed) {
+          console.log(result.value)
+          const find = await Alert({
+            title: `${result.value.nome}`,
+            imageUrl: result.value.foto_perfil
+              ? `https://conectar.s3.sa-east-1.amazonaws.com/uploads/${result.value?.foto_perfil}`
+              : userDefault,
+            confirmButtonText: 'Confirmar',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+          })
+          if (find.isConfirmed) {
+            await api
+              .put(`api/v1/pessoa_projeto/${vacancy.id}`, {
+                pessoa_id: result.value.id,
               })
-              if(find.isConfirmed){
-                await 
-                api
-                  .put(`api/v1/pessoa_projeto/${vacancy.id}`, {pessoa_id: result.value.id}).then(() => {
-                    showToast('success', 'Vaga atualizada com Sucesso!')
-                    setProfile(result.value)
-                  })
-                  .catch((err: AxiosError) => {
-                    Alert({
-                      title: `Erro: ${err.message}`,
-                      text: 'Não foi possível atualizar a vaga, tente novamente!',
-                      icon: 'error',
-                    })
-                    return err?.response?.data.detail
-                  })
-              }
-            }
-            })
+              .then(() => {
+                showToast('success', 'Vaga atualizada com Sucesso!')
+                setProfile(result.value)
+              })
+              .catch((err: AxiosError) => {
+                Alert({
+                  title: `Erro: ${err.message}`,
+                  text: 'Não foi possível atualizar a vaga, tente novamente!',
+                  icon: 'error',
+                })
+                return err?.response?.data.detail
+              })
+          }
+        }
+      })
     }
     if (result.isConfirmed)
       api

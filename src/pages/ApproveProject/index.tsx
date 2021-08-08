@@ -13,6 +13,8 @@ import VacancieCard, { IVacancyCard } from '../../components/VacancieCard'
 import { useParams } from 'react-router-dom'
 import hero from '../../assets/image/temos_um_time_para_seu_projeto.svg'
 import { IProfile } from '../../components/ProfileCard'
+import Swal from 'sweetalert2'
+import Alert from '../../utils/SweetAlert'
 interface routeParms {
   id: string
 }
@@ -79,6 +81,27 @@ const ApproveProject: React.FC = () => {
           api
             .put(`/api/v1/pessoa_projeto/${vacancy.id}`, {
               situacao: 'FINALIZADO',
+            })
+            .then(() => {
+              Alert({
+                title: 'Insira Informações importantes para os participantes',
+                input: 'text',
+                inputAttributes: {
+                  autocapitalize: 'off',
+                },
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Buscar',
+                showLoaderOnConfirm: true,
+                preConfirm: info => {
+                  return api
+                    .put(`/api/v1/projeto/${project_id}`, { mural: info })
+                    .catch(error => {
+                      Swal.showValidationMessage(error)
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading(),
+              })
             })
             .catch((err: AxiosError) => {
               console.log(err?.response?.data.detail)
