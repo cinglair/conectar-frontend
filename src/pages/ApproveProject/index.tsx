@@ -10,7 +10,7 @@ import LinksCard from '../../components/LinksCard'
 import SuccessfulCreatorsCard from '../../components/SuccessfulCreatorsCard'
 import SuccessfulProjectsCard from '../../components/SuccessfulProjectsCard'
 import VacancieCard, { IVacancyCard } from '../../components/VacancieCard'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import hero from '../../assets/image/temos_um_time_para_seu_projeto.svg'
 import { IProfile } from '../../components/ProfileCard'
 import Swal from 'sweetalert2'
@@ -24,7 +24,7 @@ const ApproveProject: React.FC = () => {
   const [vacancies, setVacancies] = useState<Array<IVacancyCard>>([])
   const [possibleDeal, setPossibleDeal] = useState(false)
   const [finalizedDeal, setFinalizedDeal] = useState(false)
-
+  const history = useHistory()
   useEffect(() => {
     const res = [
       api
@@ -96,6 +96,9 @@ const ApproveProject: React.FC = () => {
                 preConfirm: info => {
                   return api
                     .put(`/api/v1/projeto/${project_id}`, { mural: info })
+                    .then(() => {
+                      history.push(`projeto/${project_id}`)
+                    })
                     .catch(error => {
                       Swal.showValidationMessage(error)
                     })
