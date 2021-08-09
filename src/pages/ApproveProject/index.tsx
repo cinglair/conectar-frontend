@@ -91,7 +91,7 @@ const ApproveProject: React.FC = () => {
                 },
                 icon: 'info',
                 showCancelButton: true,
-                confirmButtonText: 'Buscar',
+                confirmButtonText: 'Salvar',
                 showLoaderOnConfirm: true,
                 preConfirm: info => {
                   return api
