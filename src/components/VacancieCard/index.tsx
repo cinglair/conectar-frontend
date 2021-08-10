@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useEffect, useState } from 'react'
+import React, { HTMLAttributes, useContext, useEffect, useState } from 'react'
 import { BodyCard, DropdownList } from './styles'
 import { Link } from 'react-router-dom'
 import userDefault from '../../assets/icon/user.svg'
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2'
 import { Toast } from 'react-toastify/dist/components'
 import { toast } from 'react-toastify'
 import { showToast } from '../Toast/Toast'
+import { Context } from '../../context/AuthContext'
 export interface IVacancyCard {
   projeto_id: number
   pessoa_id: number
@@ -52,6 +53,9 @@ interface ISituationVacancy {
   }
 }
 const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
+  const { user } = useContext(Context)
+  const [possibleDeal, setPossibleDeal] = useState(false)
+  const [finalizedDeal, setFinalizedDeal] = useState(false)
   const [profile, setProfile] = useState<ProfileType>({} as ProfileType)
   const [agreement, setAgreement] = useState<string>('')
   const [office, setOffice] = useState<string>('')
@@ -89,7 +93,7 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
       } não aparecerá mais para preencher essa vaga`,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Busca Automatica',
+      confirmButtonText: 'Busca Automática',
       showDenyButton: true,
       denyButtonText: 'Busca Manual',
       denyButtonColor: `var(--green)`,
@@ -109,16 +113,21 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
         preConfirm: login => {
           return api
             .get(`/api/v1/pessoas/${login}`)
-            .then(response => {
+            .then(response => {  
               console.log(response.data)
               if (response.data == null)
                 Swal.showValidationMessage(
-                  `Request failed: Usuário não encontrado`,
+                  `Usuário não encontrado`,
                 )
+              else if (response.data.usuario == user.usuario){
+                Swal.showValidationMessage(
+                  `Usuário não pode ser o dono do projeto`,
+                )
+              }
               else return response.data
             })
             .catch(error => {
-              Swal.showValidationMessage(`Request failed: ${error}`)
+              Swal.showValidationMessage(`Erro: ${error}`)
             })
         },
         allowOutsideClick: () => !Swal.isLoading(),
@@ -131,7 +140,7 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
             title: `${result.value.nome}`,
             imageUrl: result.value.foto_perfil
               ? `https://conectar.s3.sa-east-1.amazonaws.com/uploads/${result.value?.foto_perfil}`
-              : userDefault,
+              : userDefault, 
             confirmButtonText: 'Confirmar',
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
@@ -176,6 +185,12 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
           return err?.response?.data.detail
         })
   }
+  console.log(vacancy.situacao);
+  
+    useEffect(() => {
+    setPossibleDeal(vacancy.situacao? vacancy.situacao == 'ACEITO' : false)
+    setFinalizedDeal(vacancy.situacao? vacancy.situacao == 'FINALIZADO' : false)
+  }, [vacancy])
 
   useEffect(() => {
     const res = [
@@ -231,7 +246,7 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
 
       {/* <Button theme="primary">Ver currículo</Button> */}
       {/* <DropdownList IconButton={ */}
-      <Button onClick={FindPeople} theme="secondary">
+      <Button onClick={FindPeople} theme="secondary" disabled={possibleDeal || finalizedDeal}>
         Nova busca
       </Button>
       {/* <li>Perfis similares</li>

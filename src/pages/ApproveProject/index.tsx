@@ -15,6 +15,7 @@ import hero from '../../assets/image/temos_um_time_para_seu_projeto.svg'
 import { IProfile } from '../../components/ProfileCard'
 import Swal from 'sweetalert2'
 import Alert from '../../utils/SweetAlert'
+import { showToast } from '../../components/Toast/Toast'
 interface routeParms {
   id: string
 }
@@ -72,6 +73,7 @@ const ApproveProject: React.FC = () => {
         }
       }),
     )
+    showToast('success', 'Convites enviados!')
   }, [vacancies])
 
   const handleFinalizeDeal = useCallback(() => {
