@@ -1,4 +1,6 @@
-import inGif from '../assets/video/LOOP.gif'
+import inGif from '../assets/gif/IN.gif'
+import loopGif from '../assets/gif/LOOP.gif'
+import outGif from '../assets/gif/OUT.gif'
 
 export const loading = {
   start: (): void => {
@@ -9,9 +11,8 @@ export const loading = {
     gifLoading.src = inGif
     loadingContainer.appendChild(gifLoading) // adiciona o nó de texto à nova div criada
     setTimeout(() => {
-      gifLoading.src = ''
-      console.log('ed')
-    }, 1000)
+      gifLoading.src = loopGif
+    }, 850)
     // adiciona o novo elemento criado e seu conteúdo ao DOM
     const root = document.getElementById('root')
     document.body.insertBefore(loadingContainer, root)
@@ -19,6 +20,11 @@ export const loading = {
   stop: (): void => {
     const loadingContainer = document.getElementById('loadingContainer')
     if (loadingContainer) {
+      const gifImage = loadingContainer.getElementsByClassName('img')[0]
+      if (gifImage) {
+        gifImage.setAttribute('src', outGif)
+      }
+
       loadingContainer?.parentNode?.removeChild(loadingContainer)
     }
   },
