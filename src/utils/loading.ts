@@ -24,8 +24,9 @@ export const loading = {
       if (gifImage) {
         gifImage.setAttribute('src', outGif)
       }
-
-      loadingContainer?.parentNode?.removeChild(loadingContainer)
+      setTimeout(() => {
+        loadingContainer?.parentNode?.removeChild(loadingContainer)
+      }, 850)
     }
   },
 }
