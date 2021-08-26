@@ -31,7 +31,10 @@ const LiProjectLink: React.FC<IPropsProjectLink> = ({ vacancy }) => {
   }, [vacancy.papel_id])
 
   return (
-    <ProjectLink key={vacancy.id} to={`/projeto/${vacancy.projeto_id}/vagas`}>
+    <ProjectLink
+      key={vacancy.id}
+      to={`/projeto/${vacancy.projeto_id}/vagas/${vacancy.id}`}
+    >
       <img
         src={
           (profile?.toLowerCase() === 'colaborador' && co) ||

@@ -322,12 +322,13 @@ export const BodyProjects = styled.div`
       width: auto;
       height: auto;
     }
-    > aside, ${ProfileLink} {
+    > aside,
+    ${ProfileLink} {
       position: absolute;
       right: 15px;
       top: 15px;
     }
-    >aside {
+    > aside {
       display: flex;
       align-items: center;
     }

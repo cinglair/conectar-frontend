@@ -25,15 +25,32 @@ import { Context } from '../../context/AuthContext'
 import Button from '../../components/UI/Button'
 import ContainerScroll from '../../components/UI/ContainerScroll'
 import Footer from '../../components/UI/Footer'
+import Lottie from 'react-lottie'
+import animationData from '../../assets/json/loadingAnimation.json'
 const Home: React.FC = () => {
   const { AMAZON_URL } = process.env
   console.log(AMAZON_URL)
   const { handleLogin, isAuthenticated } = useContext(Context)
   const history = useHistory()
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
   return isAuthenticated ? (
     <Redirect to="/explorar" />
   ) : (
-    <BodyHome>
+    // <BodyHome>
+    //   <Lottie
+    //     options={defaultOptions}
+    //     height={400}
+    //     width={400}
+    //     isStopped={false}
+    //     isPaused={false}
+    //   />
       <main>
         <div className="topo-background">
           <NavBar />

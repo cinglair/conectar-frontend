@@ -82,11 +82,12 @@ interface IPeopleLink {
 interface IParmsProps {
   id: string
   step?: string
+  vaga?: string
 }
 const Projects: React.FC = () => {
   const { loading: userLoading, isAuthenticated, user } = useContext(Context)
   const projeto_id = useParams<IParmsProps>().id
-  const { step } = useParams<IParmsProps>()
+  const { step, vaga } = useParams<IParmsProps>()
   // const [modalContent, setModalContent] = useState<ReactNode>(null);
   const initialModalContent = {
     nome: false,
@@ -114,7 +115,17 @@ const Projects: React.FC = () => {
   const [vacancyDetail, setVacancyDetail] = useState<VacanciesType>(
     {} as VacanciesType,
   )
-
+  useEffect(() => {
+    let detail
+    if (
+      vaga &&
+      (detail = vacancies.find(vacancy => vacancy.id === Number(vaga)))
+    ) {
+      setVacancyDetail(detail)
+    } else if (vacancies.length > 0) {
+      setVacancyDetail(vacancies[0])
+    }
+  }, [vacancies, vaga])
   const getset_pessoa_projeto = useCallback(async () => {
     if (projeto_id)
       await api
@@ -338,11 +349,7 @@ const Projects: React.FC = () => {
     getset_pessoa_projeto()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projeto_id, openModal, favorited])
-  useEffect(() => {
-    if (vacancies.length > 0) {
-      setVacancyDetail(vacancies[0])
-    }
-  }, [vacancies])
+
   const handleDeleteVacancy = useCallback(async (vacancy: VacanciesType) => {
     await vacancyComponentRef.current?.handleDeleteVacancy(vacancy)
     await getset_pessoa_projeto()
