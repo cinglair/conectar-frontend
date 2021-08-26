@@ -43,14 +43,14 @@ const Home: React.FC = () => {
   return isAuthenticated ? (
     <Redirect to="/explorar" />
   ) : (
-    // <BodyHome>
-    //   <Lottie
-    //     options={defaultOptions}
-    //     height={400}
-    //     width={400}
-    //     isStopped={false}
-    //     isPaused={false}
-    //   />
+    <BodyHome>
+      {/* <Lottie
+        options={defaultOptions}
+        height={400}
+        width={400}
+        isStopped={false}
+        isPaused={false}
+      /> */}
       <main>
         <div className="topo-background">
           <NavBar />
