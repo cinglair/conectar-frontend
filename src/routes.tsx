@@ -26,6 +26,8 @@ import ForgotPassword from './pages/ForgotPassword'
 import Modal from './components/UI/Modal'
 import Login from './components/UI/Login'
 import ToastAnimated from './components/Toast/Toast'
+import LoadingAnimation from './components/LoadingAnimation'
+import LoadingProvider from './context/LoadingContext'
 const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const { isAuthenticated } = useContext(Context)
   const [modalOpen, setModalOpen] = useState(!isAuthenticated)
@@ -54,26 +56,28 @@ const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
 const Routes: React.FC = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <ToastAnimated />
-        <Route exact path="/" component={Home} />
-        <Route path="/cadastrar/:parte" component={SignUp} />
-        <Route path="/esqueceu-senha" component={ForgotPassword} />
-        <Route path="/experiencias-do-usuario" component={ProfileFeatures} />
-        <Route path="/areas-de-atuacao" component={ExperienceAreas} />
-        <Route path="/habilidades-e-ferramentas" component={MasteryTools} />
-        <Route path="/main" component={NavBar} />
-        <PrivateRoute path="/criar-um-projeto">
-          <CreateProject />
-        </PrivateRoute>
-        <Route path="/projeto-conectado/:id" component={ApproveProject} />
-        <Route path="/projeto/:id/:step?/:vaga?" component={Projects} />
-        <Route path="/editar-perfil/:id" component={EditProfile} />
-        <Route path="/perfil/:id" component={Profiles} />
-        <Route path="/explorar" component={Explorer} />
-        <Route path="/pesquisar/:for?/:attribute?/:key?" component={Search} />
-        <Route path="/sobre" component={Sobre} />
-      </BrowserRouter>
+      <LoadingProvider>
+        <BrowserRouter>
+          <ToastAnimated />
+          <Route exact path="/" component={Home} />
+          <Route path="/cadastrar/:parte" component={SignUp} />
+          <Route path="/esqueceu-senha" component={ForgotPassword} />
+          <Route path="/experiencias-do-usuario" component={ProfileFeatures} />
+          <Route path="/areas-de-atuacao" component={ExperienceAreas} />
+          <Route path="/habilidades-e-ferramentas" component={MasteryTools} />
+          <Route path="/main" component={NavBar} />
+          <PrivateRoute path="/criar-um-projeto">
+            <CreateProject />
+          </PrivateRoute>
+          <Route path="/projeto-conectado/:id" component={ApproveProject} />
+          <Route path="/projeto/:id/:step?/:vaga?" component={Projects} />
+          <Route path="/editar-perfil/:id" component={EditProfile} />
+          <Route path="/perfil/:id" component={Profiles} />
+          <Route path="/explorar" component={Explorer} />
+          <Route path="/pesquisar/:for?/:attribute?/:key?" component={Search} />
+          <Route path="/sobre" component={Sobre} />
+        </BrowserRouter>
+      </LoadingProvider>
       <GlobalStyle />
     </AuthProvider>
   )

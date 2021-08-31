@@ -21,7 +21,8 @@ import { FormHandles } from '@unform/core'
 import getValidationErrors from '../../../utils/getValidationErrors'
 import useAuth from '../../../context/hooks/useAuth'
 import getBackendErrors from '../../../utils/getBackendErros'
-import { loading } from '../../../utils/loading'
+import useLoading from '../../../context/hooks/useLoading'
+
 interface loginProps {
   onSuccessLogin(): void
 }
@@ -32,6 +33,7 @@ interface SignInFormData {
 
 const Login: React.FC<loginProps> = ({ onSuccessLogin }) => {
   const history = useHistory()
+  const loading = useLoading()
   const formRef = useRef<FormHandles>(null)
   const { handleLogin } = useAuth()
   /** This function checks the profile is idealizer, collaborator or ally, then redirects to registration these */

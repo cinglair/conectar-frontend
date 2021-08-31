@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Redirect, useHistory } from 'react-router-dom'
 import NavBar from '../../components/UI/NavBar'
 import { BodyHome } from './styles'
-
 import Login from '../../components/UI/Login'
 import hero from '../../assets/image/landing_page.svg'
 import lamp from '../../assets/image/lampada.svg'
@@ -11,46 +10,23 @@ import card_idealizador from '../../assets/image/card_idealizador.svg'
 import card_aliado from '../../assets/image/card_aliado.svg'
 import colaborador from '../../assets/image/colaborador.svg'
 import idealizador from '../../assets/image/idealizador.svg'
-import fc from '../../assets/image/fc.png'
 import aliado from '../../assets/image/aliado.svg'
 import curtiu from '../../assets/image/curtiu.svg'
-import Modal from '../../components/UI/Modal'
 import { IoIosArrowDown } from 'react-icons/io'
-import { FaLinkedinIn } from 'react-icons/fa'
-import { AiFillFacebook, AiOutlineInstagram } from 'react-icons/ai'
-import inGif from '../../assets/video/logo.mp4'
-
 import { Context } from '../../context/AuthContext'
-
 import Button from '../../components/UI/Button'
-import ContainerScroll from '../../components/UI/ContainerScroll'
 import Footer from '../../components/UI/Footer'
-import Lottie from 'react-lottie'
-import animationData from '../../assets/json/loadingAnimation.json'
+
 const Home: React.FC = () => {
   const { AMAZON_URL } = process.env
   console.log(AMAZON_URL)
   const { handleLogin, isAuthenticated } = useContext(Context)
   const history = useHistory()
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  }
+
   return isAuthenticated ? (
     <Redirect to="/explorar" />
   ) : (
     <BodyHome>
-      {/* <Lottie
-        options={defaultOptions}
-        height={400}
-        width={400}
-        isStopped={false}
-        isPaused={false}
-      /> */}
       <main>
         <div className="topo-background">
           <NavBar />
