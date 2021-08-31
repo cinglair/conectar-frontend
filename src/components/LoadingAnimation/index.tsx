@@ -20,8 +20,9 @@ interface IAnimationState {
 }
 const LoadingAnimation: React.FC<IProps> = ({ loadingPlaying, children }) => {
   const [animation, setAnimation] = useState(inAnimationData)
+  const [loop, setLoop] = useState(false)
   const defaultOptions: any = {
-    loop: true,
+    loop: loop,
     autoplay: false,
     animationData: animation,
     rendererSettings: {
@@ -39,28 +40,29 @@ const LoadingAnimation: React.FC<IProps> = ({ loadingPlaying, children }) => {
         isPaused: false,
         isStopped: false,
       })
+      setLoop(true)
       setTimeout(() => {
         setAnimation(loopAnimationData)
       }, 1000)
     } else {
+      setLoop(false)
       setAnimation(outAnimationData)
       setTimeout(() => {
         setAnimationState({
           isPaused: false,
           isStopped: true,
         })
-      }, 5000)
+      }, 700)
     }
   }, [loadingPlaying])
   return (
     <Background displayIsNone={animationState.isStopped}>
       <StyledLottie
-        options={defaultOptions}
+        options={{ ...defaultOptions, loop: loop }}
         height={400}
         width={400}
         {...animationState}
       />
-      {loadingPlaying}
     </Background>
   )
 }

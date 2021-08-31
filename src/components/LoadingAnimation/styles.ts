@@ -13,11 +13,11 @@ interface IBGProps {
   displayIsNone: boolean
 }
 export const Background = styled.div<IBGProps>`
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   width: 100%;
   height: 100%;
-  background: rgba(7, 47, 63, 0.3);
+  background: var(--background);
   display: ${props => (props.displayIsNone ? css`none` : css`flex`)};
   justify-content: center;
   align-items: center;

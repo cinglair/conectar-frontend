@@ -119,6 +119,7 @@ const Login: React.FC<loginProps> = ({ onSuccessLogin }) => {
           console.log(err)
         } else {
           const { fieldName, error } = getBackendErrors(err)
+          loading.stop()
 
           formRef.current?.setFieldError(fieldName, error)
           console.log(err.response)
