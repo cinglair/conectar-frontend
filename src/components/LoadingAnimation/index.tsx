@@ -1,16 +1,9 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-  AllHTMLAttributes,
-  createContext,
-  useCallback,
-} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Background, StyledLottie } from './styles'
 import loopAnimationData from '../../assets/json/LOOP.json'
 import inAnimationData from '../../assets/json/IN.json'
 import outAnimationData from '../../assets/json/OUT.json'
-import useLoading, { ILoadingContext } from '../../context/hooks/useLoading'
+import useLoading from '../../context/hooks/useLoading'
 interface IProps {
   loadingPlaying: boolean
 }
@@ -20,9 +13,8 @@ interface IAnimationState {
 }
 const LoadingAnimation: React.FC<IProps> = ({ loadingPlaying, children }) => {
   const [animation, setAnimation] = useState(inAnimationData)
-  const [loop, setLoop] = useState(false)
   const defaultOptions: any = {
-    loop: loop,
+    loop: true,
     autoplay: false,
     animationData: animation,
     rendererSettings: {
@@ -40,25 +32,20 @@ const LoadingAnimation: React.FC<IProps> = ({ loadingPlaying, children }) => {
         isPaused: false,
         isStopped: false,
       })
-      setLoop(true)
       setTimeout(() => {
         setAnimation(loopAnimationData)
       }, 1000)
     } else {
-      setLoop(false)
-      setAnimation(outAnimationData)
-      setTimeout(() => {
-        setAnimationState({
-          isPaused: false,
-          isStopped: true,
-        })
-      }, 700)
+      setAnimationState({
+        isPaused: false,
+        isStopped: true,
+      })
     }
   }, [loadingPlaying])
   return (
     <Background displayIsNone={animationState.isStopped}>
       <StyledLottie
-        options={{ ...defaultOptions, loop: loop }}
+        options={defaultOptions}
         height={400}
         width={400}
         {...animationState}
