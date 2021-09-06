@@ -247,8 +247,7 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
       {/* <Button theme="primary">Ver currículo</Button> */}
       {/* <DropdownList IconButton={ */}
       {
-        (possibleDeal || finalizedDeal)! && (
-
+        !finalizedDeal && (
         <Button onClick={FindPeople} theme="secondary">
           Nova busca
         </Button>
