@@ -246,9 +246,16 @@ const VacancieCard: React.FC<Props> = ({ vacancy, ...rest }) => {
 
       {/* <Button theme="primary">Ver currículo</Button> */}
       {/* <DropdownList IconButton={ */}
-      <Button onClick={FindPeople} theme="secondary" disabled={possibleDeal || finalizedDeal}>
-        Nova busca
-      </Button>
+      {
+        (possibleDeal || finalizedDeal)! && (
+
+        <Button onClick={FindPeople} theme="secondary">
+          Nova busca
+        </Button>
+        )
+      }
+      
+
       {/* <li>Perfis similares</li>
         <li>Perfis interessados</li>
         <li>Perfis interessados</li>
