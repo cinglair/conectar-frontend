@@ -85,6 +85,7 @@ export const ExperienciasDiv = styled.div`
     border-radius: 50%;
     border: solid 2px transparent;
     padding: 0.6rem;
+    word-break: break-word;
     img {
       width: 3rem;
       height: 2.6rem;
@@ -99,7 +100,9 @@ export const ExperienciasDiv = styled.div`
       visibility: hidden;
       text-align: center;
       padding: 1rem 0.4rem;
+      word-break: break-word;
       legend {
+        word-break: break-word;
         font: 500 1.2rem Raleway;
       }
       p {
