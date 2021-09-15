@@ -21,7 +21,7 @@ const LoadingAnimation: React.FC<IProps> = ({ loadingPlaying, children }) => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   }
-  const loading = useLoading()
+
   const [animationState, setAnimationState] = useState<IAnimationState>({
     isPaused: false,
     isStopped: true,

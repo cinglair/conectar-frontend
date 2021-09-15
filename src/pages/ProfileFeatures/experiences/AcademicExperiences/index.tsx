@@ -23,7 +23,7 @@ import getValidationErrors from '../../../../utils/getValidationErrors'
 import { IconEdit, IconTrash } from '../../../../assets/icon'
 import { showToast } from '../../../../components/Toast/Toast'
 import Alert from '../../../../utils/SweetAlert'
-import { loading } from '../../../../utils/loading'
+import useLoading from '../../../../context/hooks/useLoading'
 
 /**
  *
@@ -44,6 +44,7 @@ export interface AcademicType {
 
 const AcademicExperiences: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
+  const loading = useLoading()
   const [showRegister, setShowRegister] = useState<boolean>(false)
   const [isIncomplete, setIsIncomplete] = useState<boolean>(false)
   const [initialYear, setInitialYear] = useState<number>(

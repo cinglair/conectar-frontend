@@ -44,23 +44,23 @@ export const ProjetosSection = styled.section`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    width: 100%!important;
+    width: 100% !important;
   }
   section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    h2{
+    h2 {
       margin-top: 1rem;
     }
-    h1{
+    h1 {
       margin-top: 0.2rem;
       font-weight: 400;
       font-size: 1rem;
     }
 
-    svg{
+    svg {
       width: 30px;
       height: 30px;
     }
@@ -74,6 +74,7 @@ export const ExperienciasDiv = styled.div`
   gap: 1.4rem;
   width: 90vw;
   position: relative;
+  word-break: break-word;
   > button {
     background: transparent;
     padding: 0.2rem 0.4rem;
@@ -174,15 +175,15 @@ export const PerfilMain = styled.main`
       text-align: center;
     }
   }
-  >div{
+  > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    >svg{
+    > svg {
       width: 4px;
       height: 4px;
     }
-    >Button{
+    > Button {
       font-weight: 400;
       font-size: 10px;
       width: auto;

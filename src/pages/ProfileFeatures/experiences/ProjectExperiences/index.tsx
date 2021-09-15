@@ -29,7 +29,7 @@ import { IconEdit, IconTrash } from '../../../../assets/icon'
 import { OptionTypeBase, Props as SelectProps } from 'react-select'
 import { showToast } from '../../../../components/Toast/Toast'
 import Alert from '../../../../utils/SweetAlert'
-import { loading } from '../../../../utils/loading'
+import useLoading from '../../../../context/hooks/useLoading'
 
 export interface IExperienceProject {
   id: number
@@ -60,6 +60,7 @@ const ProjectExperiences: React.FC = () => {
   const [initialYear, setInitialYear] = useState<number>(
     new Date().getFullYear() + 1,
   )
+  const loading = useLoading()
   const [currentilyProject, setCurrentilyProject] = useState<boolean>(false)
   const [stored, setStored] = useState<IExperienceProject[]>([])
   // eslint-disable-next-line react-hooks/exhaustive-deps

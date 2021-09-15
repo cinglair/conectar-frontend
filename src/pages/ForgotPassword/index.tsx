@@ -10,7 +10,7 @@ import { Form } from '@unform/web'
 import getValidationErrors from '../../utils/getValidationErrors'
 import InputMask from '../../components/UI/InputMask'
 import logo from '../../assets/image/logo_icone.svg'
-import { loading } from '../../utils/loading'
+import useLoading from '../../context/hooks/useLoading'
 interface FirstFormData {
   email: string
 }
@@ -30,7 +30,7 @@ const ForgotPassword: React.FC = () => {
   const history = useHistory()
   const [shownStep, setShownStep] = useState<1 | 2 | 3>(1)
   const [firstData, setfirstData] = useState<FirstFormData>({ email: `` })
-
+  const loading = useLoading()
   const handleSubmit = useCallback(async (formData: FirstFormData) => {
     console.log(formData)
     try {

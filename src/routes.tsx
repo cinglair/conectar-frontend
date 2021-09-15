@@ -1,11 +1,5 @@
-import React, { Children, useContext, useState } from 'react'
-import {
-  Route,
-  BrowserRouter,
-  useLocation,
-  Switch,
-  RouteProps,
-} from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Route, BrowserRouter, RouteProps } from 'react-router-dom'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import ProfileFeatures from './pages/ProfileFeatures'
@@ -26,7 +20,6 @@ import ForgotPassword from './pages/ForgotPassword'
 import Modal from './components/UI/Modal'
 import Login from './components/UI/Login'
 import ToastAnimated from './components/Toast/Toast'
-import LoadingAnimation from './components/LoadingAnimation'
 import LoadingProvider from './context/LoadingContext'
 const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const { isAuthenticated } = useContext(Context)

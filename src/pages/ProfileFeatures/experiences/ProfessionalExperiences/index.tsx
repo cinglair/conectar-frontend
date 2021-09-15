@@ -29,7 +29,8 @@ import { IconEdit, IconTrash } from '../../../../assets/icon'
 import { showToast } from '../../../../components/Toast/Toast'
 import Alert from '../../../../utils/SweetAlert'
 import { IExperienceProject } from '../ProjectExperiences'
-import { loading } from '../../../../utils/loading'
+import useLoading from '../../../../context/hooks/useLoading'
+
 export interface ProfessionalType {
   id: number
   organizacao: string
@@ -66,6 +67,7 @@ const ProfessionalExperiences: React.FC = () => {
     { label: 'Meio Período', value: 'Meio Período' },
     { label: 'Tempo Integral', value: 'Tempo Integral' },
   ]
+  const loading = useLoading()
   const [showRegister, setShowRegister] = useState<boolean>(false)
   const [openModal, setOpenModal] = useState<boolean>(false)
   const formRef = useRef<FormHandles>(null)

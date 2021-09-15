@@ -9,11 +9,12 @@ import api from '../../services/api'
 import * as Yup from 'yup'
 import { FormHandles } from '@unform/core'
 import getValidationErrors from '../../utils/getValidationErrors'
-import { loading } from '../../utils/loading'
+import useLoading from '../../context/hooks/useLoading'
 
 const ExperienceAreas: React.FC = () => {
   const history = useHistory()
   const formRef = useRef<FormHandles>(null)
+  const loading = useLoading()
   const handleSubmit = useCallback(
     async (formData: { areas: string[] }) => {
       console.log(formData)

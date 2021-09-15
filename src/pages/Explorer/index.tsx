@@ -23,7 +23,7 @@ import SuccessfulProjectsCard from '../../components/SuccessfulProjectsCard'
 import RecentesInviteCard from '../../components/RecentesInviteCard'
 
 const Explorer: React.FC = () => {
-  const { loading, isAuthenticated } = useContext(Context)
+  const { isAuthenticated } = useContext(Context)
   const [projects, setProjects] = useState<IProject[]>([])
   useEffect(() => {
     api

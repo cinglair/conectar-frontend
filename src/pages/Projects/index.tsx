@@ -52,7 +52,7 @@ import { showToast } from '../../components/Toast/Toast'
 import { IReaction } from '../../components/ProjectCard'
 import { BsFillStarFill } from 'react-icons/bs'
 import Alert from '../../utils/SweetAlert'
-import { loading } from '../../utils/loading'
+import useLoading from '../../context/hooks/useLoading'
 
 interface ProjectType {
   nome: string
@@ -98,6 +98,7 @@ const Projects: React.FC = () => {
     habilidades: false,
     mural: false,
   }
+  const loading = useLoading()
   const [modalContent, setModalContent] = useState(initialModalContent)
   const history = useHistory()
   const [openModal, setOpenModal] = useState<boolean>(

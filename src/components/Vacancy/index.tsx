@@ -29,7 +29,7 @@ import ContainerScroll from '../UI/ContainerScroll'
 import { showToast } from '../Toast/Toast'
 import { ProfileType } from '../../pages/Profiles'
 import Alert from '../../utils/SweetAlert'
-import { loading } from '../../utils/loading'
+import useLoading from '../../context/hooks/useLoading'
 export type TypeSituationVacancy =
   | 'PENDENTE_IDEALIZADOR'
   | 'PENDENTE_COLABORADOR'
@@ -82,7 +82,7 @@ const Vacancy: ForwardRefRenderFunction<handleVacancy, VacancyProps> = (
   const [showRegister, setShowRegister] = useState<boolean>(false)
   const [vacancies, setVacancies] = useState<Array<VacanciesType>>([])
   const [editVacancy, setEditVacancy] = useState<VacanciesType>()
-
+  const loading = useLoading()
   const [optionsAcordo, setOptionsAcordo] = useState<
     Array<OptionHTMLAttributes<HTMLOptionElement>>
   >([])

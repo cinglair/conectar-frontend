@@ -23,11 +23,11 @@ import { Form } from '@unform/web'
 import getValidationErrors from '../../utils/getValidationErrors'
 import { IoMdAlert } from 'react-icons/io'
 import { useContext, useEffect } from 'react'
-import { loading } from '../../utils/loading'
 import { Context } from '../../context/AuthContext'
 import ProfileTypeToogleSwitch from '../../components/UI/ProfileTypeToggleSwitch'
 import Alert from '../../utils/SweetAlert'
 import { OptionTypeBase } from 'react-select'
+import useLoading from '../../context/hooks/useLoading'
 
 interface routeParms {
   parte: string
@@ -51,7 +51,7 @@ const SignUp: React.FC = () => {
   const { handleLogin, isAuthenticated } = useContext(Context)
   const params = useParams<routeParms>()
   const formRef = useRef<FormHandles>(null)
-
+  const loading = useLoading()
   const [daysOption, setDaysOption] = useState<OptionTypeBase[]>([])
   const defaultFormData: PessoaType = {
     nome: '',

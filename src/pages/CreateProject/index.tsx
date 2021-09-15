@@ -23,7 +23,7 @@ import getValidationErrors from '../../utils/getValidationErrors'
 import Vacancy from '../../components/Vacancy'
 import Alert from '../../utils/SweetAlert'
 import { Context } from '../../context/AuthContext'
-import { loading } from '../../utils/loading'
+import useLoading from '../../context/hooks/useLoading'
 
 export interface ProjectType {
   descricao: string
@@ -60,6 +60,7 @@ const FirstForm: React.FC = () => {
   const { setShownStep, firstData, setfirstData } = useContext(
     ContextCreateProjectPage,
   )
+  const loading = useLoading()
   useEffect(() => {
     if (Object.entries(firstData).length === 0) {
       formRef.current?.reset()
@@ -146,6 +147,7 @@ const SecondForm: React.FC = () => {
   const { setShownStep, firstData, setProject } = useContext(
     ContextCreateProjectPage,
   )
+  const loading = useLoading()
   const handleSecondSubmit = useCallback(
     async (formData: SecondFormData) => {
       try {
@@ -221,7 +223,7 @@ const SecondForm: React.FC = () => {
         loading.stop()
       }
     },
-    [firstData, id_pessoa, setProject, setShownStep],
+    [firstData, id_pessoa, loading, setProject, setShownStep],
   )
   return (
     <Form ref={formRef} className="segunda-etapa" onSubmit={handleSecondSubmit}>

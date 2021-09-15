@@ -35,7 +35,7 @@ import { type } from 'os'
 import Dropzone from '../../components/UI/Dropzone'
 import { ProfileType } from '../Profiles'
 import Alert from '../../utils/SweetAlert'
-import { loading } from '../../utils/loading'
+import useLoading from '../../context/hooks/useLoading'
 
 interface routeParms {
   id: string
@@ -73,6 +73,7 @@ interface IEditForm {
 }
 const FormAreas: React.FC<IEditForm> = ({ profile, updateProfile }) => {
   const formRef = useRef<FormHandles>(null)
+  const loading = useLoading()
   const handleSubmit = useCallback(
     async (formData: { areas: string[] }) => {
       console.log(formData)
@@ -141,6 +142,7 @@ const FormAreas: React.FC<IEditForm> = ({ profile, updateProfile }) => {
 }
 const FormTools: React.FC<IEditForm> = ({ profile, updateProfile }) => {
   const formRef = useRef<FormHandles>(null)
+  const loading = useLoading()
   const handleSubmit = useCallback(
     async (formData: { habilidades: string[] }) => {
       console.log(formData)
@@ -218,6 +220,7 @@ const EditProfile: React.FC = () => {
   const [menuOptionSelected, setMenuOptionSelected] = useState<TypeMenuOptions>(
     'Informações básicas',
   )
+  const loading = useLoading()
   const { user, handleLogout } = useContext(Context)
   const [profile, setProfile] = useState<ProfileType>({} as ProfileType)
   const profile_id = Number(useParams<routeParms>().id)
