@@ -33,7 +33,7 @@ export const ProfileButton = styled.button`
   gap: 0.6rem;
   margin: 0.4rem;
   margin-left: 2rem;
-  > a img {
+  > img {
     border-radius: 50%;
     border: solid 1px var(--borderDivision);
     width: 2.4rem;
@@ -129,13 +129,15 @@ export const BodyCard = styled.li<CardProps>`
     position: absolute;
     right: 0.6rem;
   }
-  > img {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-  }
-  > h2 {
-    font-size: 1.4rem;
+  > a {
+    > img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+    > h2 {
+      font-size: 1.4rem;
+    }
   }
   > h3,
   h4 {
