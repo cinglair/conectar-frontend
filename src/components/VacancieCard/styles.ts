@@ -33,7 +33,7 @@ export const ProfileButton = styled.button`
   gap: 0.6rem;
   margin: 0.4rem;
   margin-left: 2rem;
-  > img {
+  > a img {
     border-radius: 50%;
     border: solid 1px var(--borderDivision);
     width: 2.4rem;
