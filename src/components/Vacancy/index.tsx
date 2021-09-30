@@ -142,9 +142,11 @@ const Vacancy: ForwardRefRenderFunction<handleVacancy, VacancyProps> = (
         .get('/api/v1/papel')
         .then((response: AxiosResponse<ITipoAcordo[]>) => {
           setOptionsPapel(
-            response.data.map(item => {
-              return { value: item.id, label: item.descricao }
-            }),
+            response.data
+              .filter(item => item.descricao !== 'Idealizador')
+              .map(item => {
+                return { value: item.id, label: item.descricao }
+              }),
           )
         })
         .catch((err: AxiosError) => {
