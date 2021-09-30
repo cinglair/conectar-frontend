@@ -306,6 +306,7 @@ const Vacancy: ForwardRefRenderFunction<handleVacancy, VacancyProps> = (
     [
       editVacancy?.id,
       getset_pessoa_projeto,
+      loading,
       post_pessoa_projeto,
       put_pessoa_projeto,
       vacancies.length,
