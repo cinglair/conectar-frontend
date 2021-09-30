@@ -10,5 +10,6 @@ export const BodyTextarea = styled.div`
     padding: 0.4rem 0;
     outline: 0;
     resize: none;
+    word-break: break-word;
   }
 `

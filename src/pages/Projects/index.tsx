@@ -236,7 +236,7 @@ const Projects: React.FC = () => {
         formRef.current?.setErrors({})
         const schema = Yup.object().shape({
           nome: modalContent.nome
-            ? Yup.string().required('Nome é obrigatório').trim()
+            ? Yup.string().required('Nome é obrigatório').trim().max(75)
             : Yup.string(),
           img: modalContent.nome
             ? Yup.mixed()

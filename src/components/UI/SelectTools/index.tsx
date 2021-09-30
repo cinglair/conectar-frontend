@@ -11,6 +11,7 @@ import { AxiosError } from 'axios'
 import api from '../../../services/api'
 import { useField } from '@unform/core'
 import { IconTrash } from '../../../assets/icon'
+import Alert from '../../../utils/SweetAlert'
 interface SelectToolProps {
   name: string
   defaultValue?: string[]
@@ -123,7 +124,14 @@ const SelectTool: React.FC<SelectToolProps> = ({
     (event: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target
       if (name === 'newTool') {
-        setNewTool({ nome: value })
+        value.length < 30? setNewTool({ nome: value }) : 
+        Alert({
+          title: `Nome muito grande`,
+          text: 'Insira uma habilidade, ferramenta ou matéria com ate 30 caracteres',
+          showCancelButton: true,
+          showConfirmButton: true,
+          icon: 'warning',
+        })
       }
     },
     [],
