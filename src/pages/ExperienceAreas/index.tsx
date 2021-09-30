@@ -23,8 +23,8 @@ const ExperienceAreas: React.FC = () => {
         formRef.current?.setErrors({})
         const schema = Yup.object().shape({
           areas: Yup.array()
-            .min(1, 'Seleciono pelo menos 1 área')
-            .max(5, 'Seleciono no máximo 5'),
+            .min(1, 'Selecione pelo menos 1 área')
+            .max(5, 'Selecione no máximo 5'),
         })
         await schema.validate(formData, {
           abortEarly: false,

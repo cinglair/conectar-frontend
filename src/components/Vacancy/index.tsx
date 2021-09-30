@@ -275,11 +275,11 @@ const Vacancy: ForwardRefRenderFunction<handleVacancy, VacancyProps> = (
           descricao: Yup.string().required('Descrição é obrigatório'),
           tipoContrato: Yup.string().required('Tipo de contrato é obrigatório'),
           areas: Yup.array()
-            .min(1, 'Seleciono pelo menos 1 item')
-            .max(15, 'Seleciono no máximo 15'),
+            .min(1, 'Selecione pelo menos 1 item')
+            .max(15, 'Selecione no máximo 15'),
           habilidades: Yup.array()
-            .min(1, 'Seleciono pelo menos 1 item')
-            .max(15, 'Seleciono no máximo 15'),
+            .min(1, 'Selecione pelo menos 1 item')
+            .max(15, 'Selecione no máximo 15'),
         })
         await schema.validate(formData, {
           abortEarly: false,

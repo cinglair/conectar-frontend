@@ -263,13 +263,13 @@ const Projects: React.FC = () => {
             : Yup.string(),
           habilidades: modalContent.habilidades
             ? Yup.array()
-                .min(1, 'Seleciono pelo menos 1 item')
-                .max(5, 'Seleciono no máximo 5')
+                .min(1, 'Selecione pelo menos 1 item')
+                .max(5, 'Selecione no máximo 5')
             : Yup.array(),
           areas: modalContent.areas
             ? Yup.array()
-                .min(1, 'Seleciono pelo menos 1 item')
-                .max(5, 'Seleciono no máximo 5')
+                .min(1, 'Selecione pelo menos 1 item')
+                .max(5, 'Selecione no máximo 5')
             : Yup.array(),
         })
         await schema.validate(formData, {
