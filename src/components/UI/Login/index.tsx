@@ -142,8 +142,8 @@ const Login: React.FC<loginProps> = ({ onSuccessLogin }) => {
       <Button type="submit" theme="primary">
         Entrar
       </Button>
-      <p>ou</p>
-      <aside>
+      {/* <p>ou</p> */}
+      {/* <aside>
         <FacebookLogin
           textButton=""
           appId="364709984736964"
@@ -153,7 +153,7 @@ const Login: React.FC<loginProps> = ({ onSuccessLogin }) => {
           cssClass="facebook-button"
           icon={<FaFacebook />}
         />
-        {/* <GoogleLogin
+        <GoogleLogin
           clientId="1027346829762-a6tjn6i5a8r50nn0cskrg4sholipvt5j.apps.googleusercontent.com"
           render={renderProps => (
             <button
@@ -170,8 +170,8 @@ const Login: React.FC<loginProps> = ({ onSuccessLogin }) => {
             console.log(res)
           }}
           cookiePolicy={'single_host_origin'}
-        /> */}
-      </aside>
+        />
+      </aside> */}
       <p>
         Novo no Conectar? <Link to="/cadastrar/1">Crie uma conta</Link>
       </p>

@@ -319,7 +319,7 @@ const SignUp: React.FC = () => {
                   Continuar
                 </Button>
               </section>
-              <section>
+              {/* <section>
                 <FacebookLogin
                   appId="1088597931155576"
                   autoLoad={false}
@@ -329,7 +329,7 @@ const SignUp: React.FC = () => {
                   textButton="Cadastre-se com Facebook"
                   icon={<FaFacebookF />}
                 />
-                {/* <GoogleLogin
+                <GoogleLogin
                   clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
                   render={renderProps => (
                     <button
@@ -345,8 +345,8 @@ const SignUp: React.FC = () => {
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                   cookiePolicy={'single_host_origin'}
-                /> */}
-              </section>
+                />
+              </section> */}
             </div>
           </div>
         </Form>
@@ -369,13 +369,13 @@ const SignUp: React.FC = () => {
                 mask="(99) 99999-9999 "
               />
               <Select
-                label="Dia de Nascimento"
-                name="day"
-                options={daysOption}
+                label="Ano de Nascimento"
+                name="year"
+                options={yearOptions}
                 onChange={(option: OptionTypeBase) => {
                   setFirstData({
                     ...firstFormData,
-                    day: option?.value,
+                    year: option?.value,
                   })
                 }}
               />
@@ -391,13 +391,13 @@ const SignUp: React.FC = () => {
                 }}
               />
               <Select
-                label="Ano de Nascimento"
-                name="year"
-                options={yearOptions}
+                label="Dia de Nascimento"
+                name="day"
+                options={daysOption}
                 onChange={(option: OptionTypeBase) => {
                   setFirstData({
                     ...firstFormData,
-                    year: option?.value,
+                    day: option?.value,
                   })
                 }}
               />
