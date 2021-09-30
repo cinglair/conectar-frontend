@@ -7,7 +7,7 @@ import React, {
   ChangeEvent,
   FormEvent,
 } from 'react'
-import { BodyCard, DropdownList, StyleInput, ProfileButton } from './styles'
+import { BodyCard, StyleInput, ProfileButton } from './styles'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import userDefault from '../../assets/icon/user.svg'
 import lupa from '../../assets/icon/lupa.svg'
@@ -66,12 +66,10 @@ interface IModalProps {
   vacancyId: number
 }
 const ModalFindPeople: React.FC<IModalProps> = props => {
-  const history = useHistory()
-  const location = useLocation()
-  const [searchKey, setSearchKey] = useState<string>('')
+  const { user } = useContext(Context)
   const [peoplesFounds, setPeoplesFounds] = useState<ProfileType[]>([])
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target
+    const { value } = event.target
     api.get(`/api/v1/pessoa/nome/${value}`).then(response => {
       setPeoplesFounds(response.data)
     })
@@ -123,7 +121,7 @@ const ModalFindPeople: React.FC<IModalProps> = props => {
         <input placeholder="Nome ou usuário" onChange={handleChange} />
       </StyleInput>
       {peoplesFounds
-        .filter((_, index) => index <= 10)
+        .filter((profile, index) => index <= 10 && profile.id === user.id)
         .map(profile => (
           <ProfileButton
             key={profile.id}
